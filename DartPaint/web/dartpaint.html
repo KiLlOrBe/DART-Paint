@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DartPaint</title>
-    
-    <script async type="application/dart" src="dartpaint.dart"></script>
-    <script async src="packages/browser/dart.js"></script>
-    
-    <link rel="stylesheet" href="dartpaint.css">
-  </head>
-  <body>
-    <h1>DartPaint</h1>
-    
-    <p>Hello world from Dart!</p>
-    
-    <div id="sample_container_id">
-      <p id="sample_text_id">Click me!</p>
-    </div>
-
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DartPaint</title>
+        <script async type="application/dart" src="dartpaint.dart"></script>
+        <script async src="packages/browser/dart.js"></script>
+        <link rel="stylesheet" href="dartpaint.css">
+    </head>
+    <body>
+        <div id="mainContainer">
+            <div id="toolbar">
+                <div id="tb1">
+                    <button id="tb1_new">New</button>
+                    <button id="tb1_save">Save</button>
+                </div>
+                <div id="tb2">
+                    <input type="color" id="tb2_color">
+                    <input type="number" min="1" id="tb2_lineWidth">
+                </div>
+            </div>
+            <canvas id="paintArea"></canvas>
+            <input type="text" id="pictureSize" readonly value="800x800">
+        </div>
+    </body>
 </html>
