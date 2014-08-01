@@ -7,8 +7,8 @@ part 'draw_context.dart';
 part 'surface.dart';
 
 class Container {
-  Container();
-  
+  Container(){
+  }
   List<Action> actions;
   DrawContext context;
   
