@@ -32,7 +32,9 @@ body {
     height: 25px;
     border-radius: 5px 5px 0px 0px;
     border:1px solid #ccc;
+    border-bottom: 0px;
     margin-bottom: 0px;
+    margin-left: 0px;
 
 }
 #tb2 {
@@ -42,11 +44,17 @@ body {
     width: 50%;
 }
 #tb2 input{
-    height: 25px;
-    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    border-radius: 5px 5px 5px 5px;
     border:1px solid #ccc;
     margin-bottom: 0px;
+    margin-right: 0px;
 
+}
+#tb2 input[type=color]{
+    width: 20px;
 }
 canvas{
     display: block;
