@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'dart:html';
-import 'dart:math';
+import 'dart:js';
 
 void main() {
   Controller controller = new Controller();
@@ -11,6 +11,8 @@ class Controller {
   var clientRect;
   int x;
   int y;
+  int lx;
+  int ly;
   int canvasWidth;
   int canvasHeight;
   var canvasData;
@@ -24,10 +26,10 @@ class Controller {
   Controller() {
     this.colorInput = querySelector("#tb2_color");
     this.lineWidthInput = querySelector("#tb2_lineWidth");
-    newDraw(800,800);
+    newDraw();
     this.isHolding = false;
     this.isErasing = false;
-    querySelector("#tb1_new").onClick.listen((e){newDraw(800,800);});
+    querySelector("#tb1_new").onClick.listen((e){newDraw();});
     querySelector("#tb1_save").onClick.listen((e){saveDraw();});
     ctx.canvas.onMouseMove.listen((e){
       update(e);
@@ -38,6 +40,8 @@ class Controller {
   }
   startHolding(){
     this.isHolding=true;
+    this.lx = this.x;
+    this.ly = this.y;
   }
   stopHolding(){
     this.isHolding=false;
@@ -71,17 +75,27 @@ class Controller {
   }
   draw (x, y) {
     if(this.isHolding){
-      this.ctx.fillStyle = this.colorInput.value;
+      this.ctx.strokeStyle= this.colorInput.value;
+      this.ctx.lineWidth= this.lineWidthInput.valueAsNumber;
+      this.ctx.lineCap='round';
       this.ctx.beginPath();
-      this.ctx.arc(x, y, this.lineWidthInput.valueAsNumber, 0, PI*2, true); 
+      this.ctx.moveTo((this.lx).toDouble(),(this.ly).toDouble());
+      this.ctx.lineTo((this.x).toDouble(),(this.y).toDouble());
+      this.ctx.stroke();
       this.ctx.closePath();
-      this.ctx.fill();
+      this.lx = this.x;
+      this.ly = this.y;
     }
     else{
     }
   }
-  newDraw(x,y){
+  newDraw(){
+    x = 800;
+    y = 800;
     this.canvas = querySelector("#paintArea");
+    querySelector("#pictureSize").value = x.toString()+"x"+y.toString();
+    this.canvas.width = x;
+    this.canvas.height = y;
     this.ctx = canvas.context2D;
     this.ctx.clearRect(0,0,x,y);
     this.canvasWidth = canvas.width;

@@ -24,6 +24,15 @@
             <canvas id="paintArea" width="800" height="800"></canvas>
             <input type="text" id="pictureSize" readonly value="800x800">
         </div>
+        <div id="blackscreen"></div>
+        <div id="popup">
+            <p>Please fill the following fields</p>
+            <strong>Width:</strong><br>
+            <input type="number" value="500" min="1" id="pp_width"><br>
+            <strong>Height:</strong><br>
+            <input type="number" value="500" min="1" id="pp_height"><br>
+            <button id="pp_submit">OK</button>
+        </div>
         <div id="debug">X: <span id="db_xPos"></span> Y: <span id="db_yPos"></span></div>
     </body>
 </html>
