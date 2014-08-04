@@ -21,7 +21,8 @@ class Controller {
   String color;
   InputElement colorInput;
   InputElement lineWidthInput;
-
+  int windowWidth;
+  int windowHeight;
 
   Controller() {
     this.colorInput = querySelector("#tb2_color");
@@ -73,7 +74,7 @@ class Controller {
     querySelector("#db_xPos").text = this.x.toString();
     querySelector("#db_yPos").text = this.y.toString();
   }
-  draw (x, y) {
+  draw (int x, int y) {
     if(this.isHolding){
       this.ctx.strokeStyle= this.colorInput.value;
       this.ctx.lineWidth= this.lineWidthInput.valueAsNumber;
@@ -90,19 +91,33 @@ class Controller {
     }
   }
   newDraw(){
-    x = 800;
-    y = 800;
+  	this.windowWidth = document.documentElement.clientWidth;
+   	this.windowHeight = document.documentElement.clientHeight;
+   	querySelector("#blackscreen").style.display="block";
+   	querySelector("#popup").style
+   	..display="block"
+   	..top=((this.windowHeight/2-150/2).round()).toString()+"px"
+   	..left=((this.windowWidth/2-200/2).round()).toString()+"px";
+   	querySelector("#pp_submit").onClick.listen((e){
+   		int x = querySelector("#pp_width").value;
+      int y = querySelector("#pp_height").value;
+      createDraw(x,y);
+   	});
+  }
+  createDraw(int x, int y){
+  	querySelector("#blackscreen").style.display="none";
+    querySelector("#popup").style.display="none";
     this.canvas = querySelector("#paintArea");
     querySelector("#pictureSize").value = x.toString()+"x"+y.toString();
     this.canvas.width = x;
     this.canvas.height = y;
-    this.ctx = canvas.context2D;
+    this.ctx = this.canvas.context2D;
     this.ctx.clearRect(0,0,x,y);
-    this.canvasWidth = canvas.width;
-    this.canvasHeight = canvas.height;
+    this.canvasWidth = this.canvas.width;
+    this.canvasHeight = this.canvas.height;
     this.canvasData = ctx.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
   }
   saveDraw(){
-    window.location.href = canvas.toDataUrl("image/png").replaceFirst("image/png", "image/octet-stream");
+    window.location.href = this.canvas.toDataUrl("image/png").replaceFirst("image/png", "image/octet-stream");
   }
 }
